@@ -16,7 +16,10 @@ char *keywords[13] = {
 int find_tab(char id[21]) {
     int i;
     for (i=0; i<13; i++)
-        (!strcmp(keywords[i], id)) ? return i : continue;
+		if (!strcmp(keywords[i], id))
+			return i;
+		else
+			continue;
     return -1;
 }
 

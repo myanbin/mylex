@@ -20,11 +20,11 @@ int main() {
 
     clock_t start, finish;
 
-    printf("MYLex is a PL/0 Lexical Analyzer by C luanage\n\n");
-    printf("Input the source file : ");
+    printf("mylex is a pl/0 lexical analyzer by c luanage\n");
+    printf("\ninput the source file : ");
     gets_s(filename, 20);
     if ((source = fopen(filename, "r")) == NULL) {
-        printf("Error: the file \"%s\" can not be opened, press anykey to exit ...\n", filename);
+        printf("\n%s can not be opened, press anykey to exit ...\n", filename);
         _getch();
         return 1;
     }
@@ -35,7 +35,7 @@ int main() {
             outname[i] = filename[i];
         strcat(outname, ".out");
         if ((out=fopen(outname,"w+")) == NULL) {
-            printf("Error: can't create \"%s\" on current path, press anykey to exit ...\n",outname);
+            printf("\ncan't create %s on current path, press anykey to exit ...\n", outname);
             _getch();
             return 1;
         }
@@ -57,13 +57,17 @@ int main() {
         stream = fopen(outname, "r");
         while(1) {
             fgets(line,100,stream);
-            feof(stream) ? break : printf("%s", line);
+			if (feof(stream))
+				break;
+			else
+				printf("%s", line);
         }
         fclose(stream);
         finish   = clock();
         duration = (double)(finish-start)/CLOCKS_PER_SEC;
-        printf("Analysis Completed. (%2.3f sec)\n", duration);
+        printf("\nanalysis completed. (%2.3f sec)\n", duration);
         printf("\n");
+		system("PAUSE");
     }
     return 0;
 }
